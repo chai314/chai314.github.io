@@ -1,0 +1,20 @@
+[[main]]
+  name = "home"
+  pageRef = "/"
+  weight = 5
+[[main]]
+  name = "research"
+  pageRef = "research"
+  weight = 10
+[[main]]
+  name = "mathy"
+  pageRef = "mathy"
+  weight = 20
+[[main]]
+  name = "writing"
+  url = "https://chai314.github.io/UnpossibleCathexis/posts/"
+  weight = 30
+[[main]]
+  name = "vitae"
+  pageRef = "vitae"
+  weight = 40

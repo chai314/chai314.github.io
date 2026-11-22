@@ -1,0 +1,33 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        function isMobileDevice() {
+            // return true;
+            return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        }
+
+        if (isMobileDevice()) {
+            const mobileText = "A little robot told me you're on mobile!\n";
+            const mobileElement = document.getElementById('mobile-only');
+            mobileElement.innerText = mobileText;
+            mobileElement.style.opacity = "0.5";
+            document.getElementById('mobile-menu').style.display = 'block';
+        }
+
+    });
+</script>
+
+<p id="mobile-only"></p>
+
+<div class="menu" id="mobile-menu" style="display: none;">
+    <h3>
+        |[&nbsp;
+        <a href="" role="button">Home</a>
+        &nbsp;][&nbsp;
+        <a href="posts" role="button">Posts</a>
+        &nbsp;][&nbsp;
+        <a href="vitae" role="button">Vitae</a>
+        &nbsp;]|
+    </h3>
+  </div>
+  

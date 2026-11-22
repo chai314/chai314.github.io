@@ -1,0 +1,24 @@
+locale = "en"
+label = "English"
+weight = 1
+title = "unpossible cathexis"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "2 January 2006"
+  description = "Academic CV Site"
+  copyright = "This is NOT an academic CV site.<br>© 2026 Chaitanya Chhabra"
+
+[params.author]
+  name = "Chaitanya Chhabra"
+  image = "img/mugshot.jpg"
+  headline = "Mathematics & Computing, IIT Guwahati"
+  bio = "Mathematics and Computing graduate of IIT Guwahati, working on lattice knots and machine learning."
+  links = [
+    { email = "mailto:chai.piequals3@gmail.com" },
+    { github = "https://github.com/chai314" },
+    { linkedin = "https://www.linkedin.com/in/chaitanya-chhabra-310b3a382/" },
+    { myanimelist = "https://myanimelist.net/profile/IAloneLevelUp" },
+  ]

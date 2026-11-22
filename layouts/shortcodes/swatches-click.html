@@ -1,0 +1,105 @@
+{{- /* "I click colors in my free time". Verbatim from the original vitae page. */ -}}
+<style>
+    .row-container {
+        display: flex;
+        gap: 10px;
+        margin: 20px;
+        width: 100%;
+        cursor: pointer; /* Indicate clickability */
+    }
+
+    .swatch {
+        flex: 1;
+        height: 50px;
+        border-radius: 5px;
+        position: relative;
+        transition: background-color 0.5s ease, transform 0.2s ease;
+        transform-origin: bottom center;
+    }
+
+    /* Jelly bounce animation */
+    @keyframes jellyBounce {
+        0% {
+            transform: translateY(0) scale(1);
+        }
+        30% {
+            transform: translateY(30px) scale(1.05, 0.95); /* Compress on downward motion */
+        }
+        50% {
+            transform: translateY(0) scale(1); /* Return to normal */
+        }
+        70% {
+            transform: translateY(15px) scale(0.95, 1.05); /* Slight overshoot */
+        }
+        100% {
+            transform: translateY(0) scale(1); /* Back to rest */
+        }
+    }
+
+    .wave-animation-1 {
+        animation: jellyBounce 2s cubic-bezier(.5, .05, .1, .3) infinite;
+    }
+
+    .wave-animation-2 {
+        animation: jellyBounce 2s cubic-bezier(.5, .05, .1, .3) infinite;
+        animation-delay: 0.3s; /* Phase shift for second swatch */
+    }
+
+    .wave-animation-3 {
+        animation: jellyBounce 2s cubic-bezier(.5, .05, .1, .3) infinite;
+        animation-delay: 0.6s; /* Phase shift for third swatch */
+    }
+</style>
+
+<div id="row1" class="row-container"></div>
+
+<script>
+    const row = document.getElementById('row1');
+    let currentTheme = 0;
+
+    // Base colors for the themes
+    const baseColors = {
+        blue: [200, 50, 60],  // Blue tone
+        red: [0, 50, 70],     // Red tone
+        amethyst: [270, 60, 70], // Purple/Amethyst tone
+        bright: [50, 100, 70], // Bright yellows, oranges
+        light: [150, 100, 70]   // Light and pastel-like
+    };
+
+    const themes = ['blue', 'red', 'amethyst', 'bright', 'light'];
+
+    function getRandomColor(baseHue, baseSaturation, baseLightness) {
+        const hue = baseHue + (Math.random() * 40 - 13); 
+        const saturation = baseSaturation + (Math.random() * 25 - 12);        const lightness = baseLightness + (Math.random() * 45 - 22);
+
+        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    }
+
+    // a random color based on current theme
+    function generateSwatch(index) {
+        const theme = themes[currentTheme];
+        const [baseHue, baseSaturation, baseLightness] = baseColors[theme];
+        const randomColor = getRandomColor(baseHue, baseSaturation, baseLightness);
+        const swatch = document.createElement('div');
+        swatch.className = 'swatch';
+        swatch.style.backgroundColor = randomColor;
+        swatch.classList.add(`wave-animation-${index + 1}`);
+        return swatch;
+    }
+
+    //  randomize swatch colors
+    function changeTheme() {
+        currentTheme = (currentTheme + 1) % themes.length; // Cycle through themes
+        const swatches = document.querySelectorAll('.swatch');
+        swatches.forEach((swatch, index) => {
+            const theme = themes[currentTheme];
+            const [baseHue, baseSaturation, baseLightness] = baseColors[theme];
+            swatch.style.backgroundColor = getRandomColor(baseHue, baseSaturation, baseLightness);
+        });
+    }
+
+    row.addEventListener('click', changeTheme);
+    for (let i = 0; i < 3; i++) {
+        row.appendChild(generateSwatch(i));
+    }
+</script>

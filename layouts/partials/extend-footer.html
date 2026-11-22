@@ -1,0 +1,13 @@
+{{/* Monte Carlo pi backdrop (shown on every page except the home page, by site.js) and the site script. */}}
+<canvas id="pi-canvas" aria-hidden="true" hidden></canvas>
+<div class="pi-box" id="pi-box" hidden>
+  {{/* the dart count is a tab that slides out of the top of the readout while the darts fly, and back in when they stop */}}
+  <span class="pi-wing" aria-hidden="true"><span class="pi-sub" id="pi-sub">0 darts</span></span>
+  {{/* AIWROTE */}}
+  <button type="button" class="pi-readout" id="pi-readout" aria-pressed="true" aria-label="Monte Carlo estimate of pi, from darts thrown at this page. Press to turn the darts off or on.">
+    <span class="pi-value">π <span id="pi-rel">≈</span> <output id="pi-value">?</output></span>
+  </button>
+</div>
+<script>window.AUTOSCROLL = {{ site.Params.autoscroll | default dict }}; window.DRAGGY = {{ site.Params.draggy | default dict }};</script>
+{{ $js := slice (resources.Get "js/autoscroll.js") (resources.Get "js/draggy.js") (resources.Get "js/knotfig.js") (resources.Get "js/site.js") | resources.Concat "js/site.bundle.js" | resources.Minify | resources.Fingerprint "sha256" }}
+<script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

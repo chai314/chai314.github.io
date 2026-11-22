@@ -1,0 +1,50 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Shantell+Sans:ital,wght@0,400..600;1,400&display=swap" rel="stylesheet">
+{{- $od := slice -}}
+{{- range $k, $v := site.Params.overdrive }}{{ if $v }}{{ $od = $od | append $k }}{{ end }}{{ end }}
+<script>document.documentElement.dataset.world = "notebook"; document.documentElement.dataset.od = {{ delimit $od " " }};</script>
+{{- if site.Params.overdrive.pages }}
+{{/* Turning pages: cross-document view transitions. Browsers without them load the page as usual. */}}
+<style>@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }</style>
+<script>
+(function () {
+  if (!("onpagereveal" in window)) return;
+  var path = function (u) { try { return new URL(u, location.href).pathname.replace(/\/+$/, "") + "/"; } catch (e) { return ""; } };
+  // the element that stands for a page: the link to it on this page, or failing that this page's title
+  function titleFor(target) {
+    var main = document.getElementById("main-content"); if (!main) return null;
+    var want = path(target), links = main.querySelectorAll("a[href]"), i, a;
+    if (want !== path(location.href)) for (i = 0; i < links.length; i++) {
+      a = links[i];
+      if (path(a.href) === want && !a.closest(".hero-intro, .cv-text, .now-more, p"))
+        return a.querySelector(".now-name, h2, h3") || a.closest("h2, h3") || a;
+    }
+    return main.querySelector("h1");
+  }
+  function rank(u) {
+    var parts = path(u).split("/"), order = ["", "research", "mathy", "vitae"], i = order.indexOf(parts[1] || "");
+    return (i < 0 ? order.length : i) * 10 + Math.min(9, parts.length);
+  }
+  // the title only travels between pages when it is on screen at both ends; from off screen it
+  // would come streaking in from a corner
+  function seen(el) { var r = el && el.getBoundingClientRect(); return !!r && r.width > 0 && r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth; }
+  var named = null;
+  function name(el) { if (named) named.style.viewTransitionName = ""; named = seen(el) ? el : null; if (named) named.style.viewTransitionName = "od-title"; }
+  window.addEventListener("pageswap", function (e) {
+    if (!e.viewTransition || !e.activation) return;
+    name(titleFor(e.activation.entry.url));
+  });
+  window.addEventListener("pagereveal", function (e) {
+    name(null);
+    if (!e.viewTransition || !window.navigation || !navigation.activation || !navigation.activation.from) return;
+    var act = navigation.activation, from = act.from.url, back;
+    if (act.navigationType === "traverse") back = act.entry.index < act.from.index;
+    else back = rank(location.href) < rank(from);
+    try { e.viewTransition.types.add(back ? "od-back" : "od-forward"); } catch (err) {}
+    name(titleFor(from));
+    e.viewTransition.finished.then(function () { name(null); }, function () { name(null); });
+  });
+})();
+</script>
+{{- end }}

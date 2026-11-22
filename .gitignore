@@ -1,0 +1,9 @@
+public/
+resources/_gen/
+.hugo_build.lock
+_drafts/
+_to_delete/
+.impeccable/
+.claude/settings.json
+.claude/settings.local.json
+.claude/launch.json

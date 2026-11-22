@@ -1,0 +1,25 @@
+{{- /* Every course as one cell, in transcript order, shaded by grade. */ -}}
+<figure class="grademap not-prose">
+  {{/* AIWROTE */}}
+  <div class="grademap-readout" aria-live="polite"><span class="gm-code">{{ len hugo.Data.courses }} courses</span><span class="gm-name">Hover, tap or tab through the squares.</span><span class="gm-grade"></span></div>
+  {{- range $y := slice "2022-23" "2023-24" "2024-25" "2025-26" }}
+  <div class="grademap-row">
+    <span class="grademap-year">{{ $y }}</span>
+    <div class="grademap-cells">
+    {{- range hugo.Data.courses }}{{ if eq .year $y }}
+      <button type="button" class="gm-cell" data-grade="{{ .grade }}" data-area="{{ .area }}" data-code="{{ .code }}" data-name="{{ .name }}" aria-label="{{ .code }}, {{ .name }}, grade {{ .grade }}"></button>
+    {{- end }}{{ end }}
+    </div>
+  </div>
+  {{- end }}
+  {{/* AIWROTE */}}
+  <figcaption class="grademap-legend">
+    <span><i class="gm-cell" data-grade="AS"></i>AS, exceptional</span>
+    <span><i class="gm-cell" data-grade="AA"></i>AA, 10</span>
+    <span><i class="gm-cell" data-grade="AB"></i>AB, 9</span>
+    <span><i class="gm-cell" data-grade="BB"></i>BB, 8</span>
+    <span><i class="gm-cell" data-grade="BC"></i>BC, 7</span>
+    <span><i class="gm-cell" data-grade="CC"></i>CC, 6</span>
+    <span><i class="gm-cell" data-grade="AU"></i>audit or pass</span>
+  </figcaption>
+</figure>

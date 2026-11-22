@@ -1,0 +1,5 @@
+{{- /* Theorem-style box. Params: kind (Definition, Problem, Remark...), name */ -}}
+<div class="claim">
+  <p class="claim-head"><span class="claim-kind">{{ .Get "kind" | default "Remark" }}.</span>{{ with .Get "name" }} <span class="claim-name">({{ . }})</span>{{ end }}</p>
+  <div class="claim-body">{{ .Inner | .Page.RenderString (dict "display" "block") }}</div>
+</div>

@@ -1,0 +1,55 @@
+# Full academic record, in transcript order. Source: official IIT Guwahati transcript.
+# area: analysis | algebra | probability | computation | systems | foundations | humanities | project
+- {code: CE 101, name: Engineering Drawing, grade: AA, credits: 7, year: 2022-23, area: foundations, text: "Bhatt & Panchal, Engineering Drawing"}
+- {code: EE 101, name: Basic Electronics, grade: AB, credits: 8, year: 2022-23, area: foundations, text: "Hayt, Kemmerly & Durbin, Engineering Circuit Analysis; Boylestad & Nashelsky, Electronic Devices and Circuit Theory"}
+- {code: MA 101, name: "Mathematics I: Calculus, single and multivariable", grade: AA, credits: 8, year: 2022-23, area: analysis, text: "Thomas & Finney, Calculus and Analytic Geometry; Apostol, Calculus Vol. II", note: "You are crushed and born anew."}
+- {code: CH 101, name: Chemistry, grade: AA, credits: 8, year: 2022-23, area: foundations, text: "Atkins, Physical Chemistry; Banwell & McCash, Fundamentals of Molecular Spectroscopy; Pine, Organic Chemistry"}
+- {code: PH 101, name: "Physics I: Lagrangian mechanics, relativity, quantum", grade: AA, credits: 6, year: 2022-23, area: foundations, text: "Taylor, Classical Mechanics; Eisberg & Resnick, Quantum Physics"}
+- {code: CH 110, name: Chemistry Laboratory, grade: AA, credits: 3, year: 2022-23, area: foundations, text: "Department of Chemistry laboratory manual"}
+- {code: ME 110, name: Workshop, grade: BB, credits: 3, year: 2022-23, area: foundations, text: "Choudhury et al., Elements of Workshop Technology Vol. I"}
+- {code: BT 101, name: Introductory Biology, grade: BB, credits: 6, year: 2022-23, area: foundations, text: "Berg, Tymoczko & Stryer, Biochemistry; Nelson & Cox, Lehninger Principles of Biochemistry"}
+- {code: CS 101, name: Introduction to Computing, grade: AB, credits: 6, year: 2022-23, area: computation, text: "Kelly & Pohl, A Book on C; Kernighan & Ritchie, The C Programming Language"}
+- {code: CS 110, name: Computing Laboratory, grade: AA, credits: 3, year: 2022-23, area: computation, text: "Gottfried & Chhabra, Programming with C"}
+- {code: EE 102, name: Basic Electronics Laboratory, grade: AB, credits: 3, year: 2022-23, area: foundations}
+- {code: ME 101, name: Engineering Mechanics, grade: AA, credits: 8, year: 2022-23, area: foundations, text: "Shames, Engineering Mechanics; Beer & Johnston, Vector Mechanics for Engineers"}
+- {code: MA 102, name: "Mathematics II: Linear Algebra and ODEs", grade: AA, credits: 8, year: 2022-23, area: algebra, text: "Poole, Linear Algebra; Ross, Differential Equations", note: "I thank Axler wholeheartedly."}
+- {code: PH 102, name: "Physics II: Electrodynamics", grade: AA, credits: 6, year: 2022-23, area: foundations, text: "Griffiths, Introduction to Electrodynamics"}
+- {code: PH 110, name: Physics Laboratory, grade: AB, credits: 3, year: 2022-23, area: foundations, text: "Jenkins & White, Fundamentals of Optics"}
+- {code: SA 102, name: Basketball, grade: PP, credits: 0, year: 2022-23, area: humanities}
+- {code: MA 201, name: "Mathematics III: Complex Analysis and PDEs", grade: AA, credits: 8, year: 2023-24, area: analysis, text: "Brown & Churchill, Complex Variables and Applications; Sneddon, Elements of PDE", note: "Tristan Needham told me all I'll remember."}
+- {code: MA 221, name: Discrete Mathematics, grade: AA, credits: 6, year: 2023-24, area: algebra, text: "Tremblay & Manohar, Discrete Mathematical Structures; Rosen, Discrete Mathematics and its Applications", note: "Very vintage. Had fun."}
+- {code: MA 222, name: Elementary Number Theory and Algebra, grade: AS, credits: 6, year: 2023-24, area: algebra, text: "Burton, Elementary Number Theory; Gallian, Contemporary Abstract Algebra", note: "Ring around the rosie. Had fun."}
+- {code: MA 225, name: Probability Theory and Random Processes, grade: AA, credits: 8, year: 2023-24, area: probability, text: "Grimmett & Stirzaker, Probability and Random Processes; Hoel, Port & Stone", note: "uwu can i haz qwant?"}
+- {code: MA 251, name: Data Structures, grade: AA, credits: 6, year: 2023-24, area: computation, text: "Cormen, Leiserson, Rivest & Stein, Introduction to Algorithms; Horowitz, Sahni & Mehta, Fundamentals of Data Structures in C++", note: "Meh. But good lab."}
+- {code: SA 202, name: Basketball, grade: PP, credits: 0, year: 2023-24, area: humanities}
+- {code: HS 200, name: Sustainable Development Goals, grade: PP, credits: 0, year: 2023-24, area: humanities, text: "Sachs, The Age of Sustainable Development; Elliott, An Introduction to Sustainable Development"}
+- {code: MA 224, name: "Real Analysis, including Lebesgue measure", grade: AA, credits: 6, year: 2023-24, area: analysis, text: "Marsden & Hoffman, Elementary Classical Analysis; Capinski & Kopp, Measure, Integral and Probability", note: "Baby Rudin's as terse as they say."}
+- {code: MA 252, name: Design and Analysis of Algorithms, grade: AB, credits: 6, year: 2023-24, area: computation, text: "Cormen, Leiserson, Rivest & Stein, Introduction to Algorithms", note: "Abdul Bari, everyone."}
+- {code: MA 271, name: Financial Engineering I, grade: BB, credits: 6, year: 2023-24, area: probability, text: "Capinski & Zastawniak, Mathematics for Finance; Shreve, Stochastic Calculus for Finance I", note: "Ew."}
+- {code: MA 641, name: Operator Theory in Hilbert Spaces, grade: AU, credits: 0, year: 2023-24, area: analysis, text: "Conway, A Course in Functional Analysis", note: "He's actually the best."}
+- {code: MA 321, name: Optimization, grade: BB, credits: 6, year: 2024-25, area: computation, text: "Bazaraa, Jarvis & Sherali, Linear Programming and Network Flows; Kambo, Mathematical Programming Techniques", note: "The worst."}
+- {code: HS 158, name: Introduction to Language Acquisition, grade: AA, credits: 6, year: 2024-25, area: humanities}
+- {code: MA 323, name: Monte Carlo Simulation, grade: AA, credits: 4, year: 2024-25, area: probability, text: "Glasserman, Monte Carlo Methods in Financial Engineering; Seydel, Tools for Computational Finance", note: "Never forget we asked prof to download default libraries."}
+- {code: MA 372, name: Stochastic Calculus for Finance, grade: AA, credits: 6, year: 2024-25, area: probability, text: "Shreve, Stochastic Calculus for Finance II; Klebaner", note: "First fun finance course. Shreve's a hero."}
+- {code: CoS 05, name: Community Service, grade: PP, credits: 0, year: 2024-25, area: humanities}
+- {code: MA 411, name: Differential Geometry, grade: AU, credits: 0, year: 2024-25, area: analysis, text: "Pressley, Elementary Differential Geometry; McCleary; do Carmo", note: "So pissed at morning labs."}
+- {code: MA 322, name: Scientific Computing, grade: BB, credits: 8, year: 2024-25, area: computation, text: "Kincaid & Cheney, Numerical Analysis; G. D. Smith, Numerical Solution of PDEs"}
+- {code: MA 324, name: Statistical Inference and Multivariate Analysis, grade: BB, credits: 6, year: 2024-25, area: probability, text: "Hogg, McKean & Craig; Johnson & Wichern"}
+- {code: MA 351, name: Theory of Computation, grade: AA, credits: 8, year: 2024-25, area: computation, text: "Hopcroft & Ullman, Introduction to Automata Theory, Languages and Computation; Lewis & Papadimitriou"}
+- {code: MA 373, name: Financial Engineering II, grade: AB, credits: 6, year: 2024-25, area: probability, text: "Bjork, Arbitrage Theory in Continuous Time"}
+- {code: MA 374, name: Financial Engineering Laboratory, grade: AB, credits: 3, year: 2024-25, area: probability, text: "Lyuu, Financial Engineering and Computation; Higham, An Introduction to Financial Option Valuation"}
+- {code: MA 622, name: Galois Theory, grade: AB, credits: 6, year: 2024-25, area: algebra, text: "Dummit & Foote, Abstract Algebra; Stewart, Galois Theory"}
+- {code: MA 312, name: Modern Algebra, grade: AU, credits: 0, year: 2024-25, area: algebra, text: "McCoy & Janusz; Gallian, Contemporary Abstract Algebra"}
+- {code: CoS 04, name: Community Service, grade: PP, credits: 0, year: 2024-25, area: humanities}
+- {code: HS 213, name: Psychology of Health and Adjustment, grade: AB, credits: 6, year: 2025-26, area: humanities, text: "Weiten & Lloyd, Psychology Applied to Modern Life; Atwater, Psychology for Living"}
+- {code: MA 423, name: Matrix Computations, grade: AB, credits: 8, year: 2025-26, area: computation, text: "Watkins; Trefethen & Bau, Numerical Linear Algebra"}
+- {code: MA 473, name: Computational Finance, grade: AA, credits: 8, year: 2025-26, area: probability, text: "Glasserman, Monte Carlo Methods in Financial Engineering; Seydel, Tools for Computational Finance"}
+- {code: MA 498, name: "Project I: Knot theory", grade: AA, credits: 6, year: 2025-26, area: project}
+- {code: MA 510, name: Combinatorics, grade: AB, credits: 6, year: 2025-26, area: algebra, text: "Aigner, A Course in Enumeration"}
+- {code: NPT 0229, name: Getting Started with Competitive Programming (NPTEL), grade: AA, credits: 6, year: 2025-26, area: computation}
+- {code: MA 625, name: Linear Algebra I, grade: AU, credits: 0, year: 2025-26, area: algebra, text: "Axler, Linear Algebra Done Right; Hoffman & Kunze, Linear Algebra"}
+- {code: HS 257, name: Ethnography of Speaking, grade: AA, credits: 6, year: 2025-26, area: humanities}
+- {code: MA 499, name: "Project II: Lattice knots", grade: AA, credits: 10, year: 2025-26, area: project}
+- {code: MA 564, name: Fractals and Chaos, grade: AA, credits: 6, year: 2025-26, area: analysis, text: "Barnsley, Fractals Everywhere; Devaney, An Introduction to Chaotic Dynamical Systems"}
+- {code: MA 645, name: "Introduction to C*-Algebras", grade: AA, credits: 6, year: 2025-26, area: analysis, text: "Murphy, C*-Algebras and Operator Theory; Kadison & Ringrose Vol. I; Douglas, Banach Algebra Techniques in Operator Theory"}
+- {code: MA 549, name: Topology, grade: AU, credits: 0, year: 2025-26, area: analysis, text: "Munkres, Topology"}

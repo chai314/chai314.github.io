@@ -1,0 +1,85 @@
+<article class="home">
+  <section class="hero">
+    <div class="hero-text">
+      {{/* The figures above the name, from `figs` in content/_index.md */}}
+      {{- with .Params.figs }}
+      <div class="scrap">
+        {{- range $i, $f := . }}
+        {{- if eq $f.kind "knot" }}
+        <figure class="fig fig-knot">
+          <svg viewBox="0 0 200 200" data-knot="{{ $f.knot | default "trefoil" }}"{{ with $f.flipped }} data-flipped="{{ . }}"{{ end }} role="img" aria-label="A {{ $f.knot | default "trefoil" }} knot, drawn as a tube"></svg>
+          {{ with $f.caption }}<figcaption class="hand">{{ . | safeHTML }}</figcaption>{{ end }}
+        </figure>
+        {{- else }}
+        {{- with resources.Get $f.src }}
+        {{- $pic := .Fill "420x480 Center q92" }}
+        <figure class="fig fig-photo">
+          <div class="fig-frame">
+            <img src="{{ $pic.RelPermalink }}" width="210" height="240" alt="{{ $f.alt }}"{{ if eq $i 0 }} fetchpriority="high"{{ end }}>
+            <span class="tape tape-a" aria-hidden="true"></span><span class="tape tape-b" aria-hidden="true"></span>
+          </div>
+          {{ with $f.caption }}<figcaption class="hand">{{ . | safeHTML }}</figcaption>{{ end }}
+        </figure>
+        {{- end }}
+        {{- end }}
+        {{- end }}
+      </div>
+      {{- end }}
+
+      {{/* AIWROTE */}}
+      <h1 class="hero-name">{{ site.Params.Author.name }} <span class="hand hero-aka">a.k.a. chai.</span></h1>
+      <p class="hero-sub">{{ site.Params.Author.headline }}</p>
+      <div class="hero-intro prose dark:prose-invert">{{ .Content }}</div>
+      <div class="hero-links">{{ partialCached "author-links.html" . }}</div>
+    </div>
+
+    <figure class="knot-lab" id="knot-lab">
+      {{/* AIWROTE */}}
+      <canvas id="knot-canvas" aria-label="A knot drawn on the cubic lattice, tightening itself by random moves. Drag to rotate{{ if site.Params.overdrive.knot }}, or drag the rope itself to pull it loose{{ end }}." role="img"></canvas>
+      <figcaption class="knot-panel">
+        <div class="knot-readout">
+          {{/* AIWROTE */}}
+          <p class="knot-name"><span class="hand knot-fig">fig. 3:</span> <span id="knot-symbol">3₁</span> <span id="knot-title">trefoil</span></p>
+          <dl class="knot-stats">
+            <div><dt>edges now</dt><dd id="knot-len">–</dd></div>
+            <div><dt>shortest found</dt><dd id="knot-best">–</dd></div>
+            <div><dt id="knot-min-label">proven minimum</dt><dd id="knot-min">24</dd></div>
+          </dl>
+        </div>
+        {{/* AIWROTE */}}
+        <div class="knot-controls">
+          <button type="button" class="chip" id="knot-next">Tie another</button>
+          <button type="button" class="chip" id="knot-shake">Shake it loose</button>
+          <button type="button" class="chip" id="knot-pause" aria-pressed="false">Pause</button>
+        </div>
+        {{/* AIWROTE */}}
+        <p class="knot-note">A knot as a polygon in ℤ³, shortened live by random BFACF moves, which never change the knot type. How short each knot can get is <a href="{{ "research/" | relURL }}">what I work on</a>. Drag to turn it{{ if site.Params.overdrive.knot }}, or take hold of the rope and pull{{ end }}.</p>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="now">
+    {{/* AIWROTE */}}
+    <h2 class="now-title">On the desk</h2>
+    <ol class="now-list">
+      {{/* AIWROTE */}}
+      {{- $items := slice
+        (dict "page" "research" "title" "Lattice knots" "blurb" "How few unit edges does a knot need when it is drawn as a polygon in the cubic lattice? Numerical search from one side, analytic bounds from the other." "tag" "research")
+        (dict "url" "https://chai314.github.io/UnpossibleCathexis/posts/one/" "title" "On the derivative of a linear operator" "blurb" "A pedantic prescription to purge a pet peeve. Written in vengeance, after a quiz." "tag" "mathy")
+        (dict "url" "https://chai314.github.io/UnpossibleCathexis/posts/two/" "title" "Gödel, Ludwig, Lean" "blurb" "The three-week course on logic, metamathematics and theorem proving I ran for the maths society. The whole course document, readable in place." "tag" "mathy")
+        (dict "url" "https://chai314.github.io/UnpossibleCathexis/posts/" "title" "Fiction, and other nonsense" "blurb" "Short stories, an anthology editorial, and a non-fictional record of one Inter-IIT trip. Style over substance. Style is substance." "tag" "writing")
+      -}}
+      {{- range $items }}
+      <li class="now-item">
+        <a href="{{ with .url }}{{ . }}{{ else }}{{ .page | relURL }}/{{ end }}">
+          <span class="now-name">{{ .title }}</span>
+          <span class="now-blurb">{{ .blurb }}</span>
+          <span class="now-tag">{{ .tag }}</span>
+        </a>
+      </li>
+      {{- end }}
+    </ol>
+    {{/* AIWROTE */}}
+    <p class="now-more">The long version of everything is in the <a href="{{ "vitae/" | relURL }}">vitae</a>, which has no page limit and behaves accordingly.</p>
+  </section>
+</article>

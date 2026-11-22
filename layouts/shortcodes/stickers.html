@@ -1,0 +1,16 @@
+{{- /* Logo stickers for the margin: {{< stickers "python sage" >}}.
+       Each name is a file in assets/img/skills/ (python.svg, sage.png, ...). Optional: tilt="-8" for the first one. */ -}}
+{{- $names := split (.Get 0 | default "") " " -}}
+{{- $tilts := slice -8 6 -4 9 -6 5 -}}
+{{- $start := .Ordinal -}}
+<div class="stickers not-prose">
+  {{- range $i, $n := $names }}
+  {{- with resources.GetMatch (printf "img/skills/%s.*" (lower $n)) }}
+  {{- $tilt := index $tilts (mod (add $i $start) 6) }}
+  {{- if and (eq $i 0) ($.Get "tilt") }}{{ $tilt = $.Get "tilt" }}{{ end }}
+  <img class="sticker{{ if in (slice "sage" "github" "streamlit") (lower $n) }} is-mono{{ end }}{{ if eq (lower $n) "latex" }} is-wide is-plain{{ end }}" src="{{ .RelPermalink }}" alt="{{ $n }}" title="{{ $n }}" loading="lazy" style="--tilt: {{ $tilt }}deg">
+  {{- else }}
+  {{- warnf "stickers: no file assets/img/skills/%s.*" $n }}
+  {{- end }}
+  {{- end }}
+</div>

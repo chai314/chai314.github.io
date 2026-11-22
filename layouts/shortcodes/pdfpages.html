@@ -1,0 +1,33 @@
+{{- /* A document reader built from pre-rendered page images in the page bundle (page-01.png ...).
+       Params: pdf (bundle file name), title.
+       Optional front matter, to list links beside a page: links: [{page: 1, url: "...", label: "..."}] */ -}}
+{{- $pages := .Page.Resources.Match "page-*.png" -}}
+{{- $pdf := .Page.Resources.GetMatch (.Get "pdf" | default "*.pdf") -}}
+{{- $links := .Page.Params.links | default slice -}}
+<div class="reader not-prose" data-reader>
+  {{/* AIWROTE */}}
+  <div class="reader-bar">
+    <span class="reader-count">page <output data-reader-now>1</output> of {{ len $pages }}</span>
+    <span class="reader-nav">
+      <button type="button" class="chip" data-reader-prev>Previous</button>
+      <button type="button" class="chip" data-reader-next>Next</button>
+    </span>
+    {{ with $pdf }}<a class="chip" href="{{ .RelPermalink }}" target="_blank" rel="noopener">Open the PDF</a>{{ end }}
+  </div>
+  <ol class="reader-pages">
+    {{- range $i, $p := $pages }}
+    {{- $n := add $i 1 }}
+    {{- $img := $p.Resize "1100x webp q82" }}
+    <li class="reader-page" id="page-{{ $n }}" data-reader-page="{{ $n }}">
+      <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $.Get "title" | default "Document" }}, page {{ $n }}" loading="{{ if lt $i 2 }}eager{{ else }}lazy{{ end }}" class="nozoom">
+      {{- with where $links "page" $n }}
+      <ul class="reader-links">
+        {{- range . }}
+        <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .label }}</a></li>
+        {{- end }}
+      </ul>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ol>
+</div>

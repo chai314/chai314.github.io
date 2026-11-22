@@ -1,0 +1,24 @@
+{{ define "main" }}
+  <article class="cv-page">
+    <header class="cv-head">
+      <h1 class="cv-name">{{ site.Params.Author.name }}</h1>
+      {{/* AIWROTE */}}
+      <p class="cv-lead">Vitae, the unabridged edition. A page limit makes a CV honest about priorities. This one has no page limit, so it is honest about everything else.</p>
+      <div class="cv-contact">{{ partialCached "author-links.html" . }}</div>
+
+      <div class="cv-tools">
+        {{/* AIWROTE */}}
+        <button type="button" class="chip chip-dice" id="cv-random">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="3.5"/><circle cx="8.5" cy="8.5" r="1" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+          Draw a line at random
+        </button>
+      </div>
+    </header>
+
+    <nav class="cv-rail" aria-label="CV sections"><ol id="cv-rail-list"></ol></nav>
+
+    <div class="cv-content prose dark:prose-invert">
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}

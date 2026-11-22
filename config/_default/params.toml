@@ -1,0 +1,130 @@
+colorScheme = "latte"
+defaultAppearance = "light"
+autoSwitchAppearance = true
+enableSearch = true
+enableCodeCopy = true
+disableImageOptimization = false
+disableTextInHeader = false
+
+[header]
+  layout = "fixed-fill-blur"
+
+[footer]
+  showMenu = false
+  showCopyright = true
+  showThemeAttribution = false
+  showAppearanceSwitcher = true
+  showScrollToTop = true
+
+[homepage]
+  layout = "custom"
+  showRecent = false
+
+[article]
+  showDate = true
+  showViews = true
+  showLikes = false
+  showDateUpdated = false
+  showAuthor = false
+  showHero = false
+  showBreadcrumbs = false
+  showDraftLabel = true
+  showEdit = false
+  seriesOpened = false
+  showHeadingAnchors = true
+  showPagination = false
+  showReadingTime = false
+  showTableOfContents = false
+  showReadingProgress = true
+  showTaxonomies = false
+  showWordCount = false
+  showZenMode = true
+
+[list]
+  showHero = false
+  showBreadcrumbs = false
+  showSummary = true
+  showViews = false
+  showLikes = false
+  showTableOfContents = false
+  showCards = false
+  orderByWeight = false
+  groupByYear = false
+  cardView = false
+
+[sitemap]
+  excludedKinds = ["taxonomy", "term"]
+
+[taxonomy]
+  showTermCount = false
+[term]
+  showTableOfContents = false
+
+# Views counter (Blowfish native, backed by Firebase). Same project as the original site.
+[firebase]
+  # apiKey = "XXXXXX"
+  # authDomain = "XXXXXX"
+  # projectId = "XXXXXX"
+  # storageBucket = "XXXXXX"
+  # messagingSenderId = "XXXXXX"
+  # appId = "XXXXXX"
+  # measurementId = "XXXXXX"
+
+  apiKey = "AIzaSyBe0UuFAjaLIXluihHrIlrbTKV_IDK7UMs"
+  authDomain = "ou-uc-1459d.firebaseapp.com"
+  projectId = "ou-uc-1459d"
+  storageBucket = "ou-uc-1459d.appspot.com"
+  messagingSenderId = "611708375363"
+  appId = "1:611708375363:web:58b27f43d333f7764edff6"
+  measurementId = "G-5D00BN89NJ"
+
+# Overdrive prototypes. Each is independent: set one to false to switch it off.
+#   knot  : the home-page knot is a rope you can grab and pull
+#   pages : moving between pages turns the leaf (browsers without it load normally)
+#   vitae : grade squares fly to their course, pencil underline on a random draw
+[overdrive]
+  knot = true
+  pages = true
+  vitae = true
+
+# Autoscroll: how the site moves the page when a button or #link sends you somewhere
+# (vitae section rail, "Draw a line at random", grade squares, the PDF
+# reader's previous / next). The code is assets/js/autoscroll.js; anything left out here
+# uses its default. Readers who ask for reduced motion always get an instant jump.
+[autoscroll]
+  smooth = true          # false: jump straight there, no glide
+  speed = 3              # px per ms; a glide takes distance / speed ...
+  min = 220              # ... but at least this many ms
+  max = 850              # ... and at most this many
+  easing = "out-cubic"   # linear | out-quad | out-cubic | out-quint | in-out-cubic
+  align = "start"        # start | center | nearest: where the target ends up
+  when = "always"        # always | offscreen (do nothing if it is already wholly in view)
+  gap = 16               # px of air left between the pinned bars and the target
+  # cover = ".fixed.top-0.inset-x-0, .cv-rail, .reader-bar"   # bars pinned to the top that a target must clear
+  yield = true           # your own wheel, touch or keys cancel a glide midway
+  # Each use can override any of the settings above, for that use only.
+  [autoscroll.uses.section]   # vitae section rail, and any #link on the site
+    align = "start"
+  [autoscroll.uses.draw]      # "Draw a line at random"
+    align = "center"
+  [autoscroll.uses.course]    # a grade square, clicked, goes to its course row
+    align = "center"
+  [autoscroll.uses.reader]    # PDF reader previous / next
+    align = "start"
+    gap = 8
+
+# Loose pieces: on the home page the pieces listed below float. Drag one with the mouse and
+# it comes a little way out of place, bumps its neighbours, and drifts back when let go. The code is assets/js/draggy.js.
+# Any element can opt in with data-draggy, or out with data-draggy="off".
+[draggy]
+  on = true              # false keeps every page still
+  reach = 90             # px a piece will come out; it resists more the further you pull
+  spring = 0.0015        # how hard home pulls it back: smaller is a slower drift home
+  damping = 0.94         # 0..1: lower settles sooner, higher wobbles more on the way home
+  shove = 0.6            # 0..1: how readily a bumped piece gets out of the way
+  give = 2.2             # a bumped piece can be pushed this many reaches from home
+  page = ".home"         # only pages containing this have loose pieces ("" for every page)
+  pieces = """
+    .home .scrap .fig, .home .hero-name, .home .hero-sub, .home .hero-intro > *, .home .hero-links,
+    .home .knot-lab, .home .now-title, .home .now-item, .home .now-more
+  """

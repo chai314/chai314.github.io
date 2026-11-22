@@ -1,0 +1,2 @@
+{{- /* Inline expandable detail: {{< unfold "visible term" >}}hidden detail{{< /unfold >}} */ -}}
+<span class="unfold"><button type="button" class="unfold-term" aria-expanded="false">{{ .Get 0 | markdownify }}</button><span class="unfold-more" hidden> {{ .Inner | markdownify }}</span></span>

@@ -1,0 +1,12 @@
+{{- /* One CV entry. Params: title, org, when, where, kind (math|code|words|life), link */ -}}
+{{- $kind := .Get "kind" | default "life" -}}
+<article class="cv-entry" data-kind="{{ $kind }}">
+  <p class="cv-when">{{ .Get "when" }}</p>
+  <div class="cv-body">
+    <h3 class="cv-title">{{ with .Get "link" }}<a href="{{ . | relURL }}">{{ $.Get "title" | markdownify }}</a>{{ else }}{{ .Get "title" | markdownify }}{{ end }}</h3>
+    {{- if or (.Get "org") (.Get "where") }}
+    <p class="cv-org">{{ with .Get "org" }}{{ . | markdownify }}{{ end }}{{ if and (.Get "org") (.Get "where") }} · {{ end }}{{ with .Get "where" }}{{ . }}{{ end }}</p>
+    {{- end }}
+    {{ with .Inner }}<div class="cv-text">{{ . | $.Page.RenderString (dict "display" "block") }}</div>{{ end }}
+  </div>
+</article>

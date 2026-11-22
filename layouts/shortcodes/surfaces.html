@@ -1,0 +1,45 @@
+{{- /* The three simply connected Riemann surfaces. The disc reads off |z| under the pointer,
+       the plane slides its grid, the sphere spins about a random axis (site.js: initSurfaces). */ -}}
+{{/* AIWROTE */}}
+<div class="surfaces not-prose" role="group" aria-label="The three simply connected Riemann surfaces">
+  <button type="button" class="surface" data-surface="disc" aria-label="The open unit disc: every complex number z with |z| less than 1">
+    <svg viewBox="0 0 160 160" aria-hidden="true">
+      <circle class="s-fill" cx="80" cy="80" r="62"/>
+      <circle class="s-ink s-open" cx="80" cy="80" r="62"/>
+      <g class="s-probe">
+        <circle class="s-thin s-level" cx="80" cy="80" r="0"/>
+        <line class="s-thin" data-radius x1="80" y1="80" x2="80" y2="80"/>
+        <circle class="s-dot" data-z cx="80" cy="80" r="3.4"/>
+      </g>
+      <circle class="s-dot" cx="80" cy="80" r="2"/>
+    </svg>
+    <span class="surface-label"><span class="surface-plain">disc</span><span class="surface-true">𝔻 = { |z| &lt; 1 }</span></span>
+  </button>
+  {{/* AIWROTE */}}
+  <button type="button" class="surface" data-surface="plane" aria-label="The complex plane, C">
+    <svg viewBox="0 0 160 160" aria-hidden="true">
+      <defs><clipPath id="s-plane-clip"><path d="M0 122 L136 122 L160 42 L24 42 Z"/></clipPath></defs>
+      <path class="s-fill" d="M0 122 L136 122 L160 42 L24 42 Z"/>
+      <g clip-path="url(#s-plane-clip)">
+        <g transform="matrix(68 0 12 -40 80 82)">
+          <path class="s-thin s-grid" vector-effect="non-scaling-stroke" d="M-1.6 -2.4V2.4 M-1.2 -2.4V2.4 M-0.8 -2.4V2.4 M-0.4 -2.4V2.4 M0 -2.4V2.4 M0.4 -2.4V2.4 M0.8 -2.4V2.4 M1.2 -2.4V2.4 M1.6 -2.4V2.4 M-2.4 -1.6H2.4 M-2.4 -1.2H2.4 M-2.4 -0.8H2.4 M-2.4 -0.4H2.4 M-2.4 0H2.4 M-2.4 0.4H2.4 M-2.4 0.8H2.4 M-2.4 1.2H2.4 M-2.4 1.6H2.4"/>
+          <path class="s-ink s-axes" vector-effect="non-scaling-stroke" d="M-2.4 0H2.4 M0 -2.4V2.4"/>
+        </g>
+        <circle class="s-dot" data-origin cx="80" cy="82" r="3"/>
+      </g>
+      <path class="s-ink" stroke-linejoin="round" d="M0 122 L136 122 L160 42 L24 42 Z"/>
+    </svg>
+    <span class="surface-label"><span class="surface-plain">plane</span><span class="surface-true">ℂ</span></span>
+  </button>
+  {{/* AIWROTE */}}
+  <button type="button" class="surface" data-surface="sphere" aria-label="The Riemann sphere, C together with a point at infinity. Press to spin it.">
+    <svg viewBox="0 0 160 160" aria-hidden="true">
+      <circle class="s-fill" cx="80" cy="80" r="62"/>
+      <path class="s-thin s-back" data-back d=""/>
+      <path class="s-thin" data-front d="M18 80 A62 17 0 0 0 142 80"/>
+      <circle class="s-ink" cx="80" cy="80" r="62"/>
+      <g data-pole transform="translate(80 24)"><circle class="s-dot" r="3.2"/><text class="s-inf" x="7" y="-4">∞</text></g>
+    </svg>
+    <span class="surface-label"><span class="surface-plain">sphere</span><span class="surface-true">ℂ ∪ {∞}</span></span>
+  </button>
+</div>
