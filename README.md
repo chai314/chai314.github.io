@@ -1,14 +1,8 @@
 # unpossible cathexis
 
-Homepage of Chaitanya Chhabra. Built with [Hugo](https://gohugo.io) (extended, 0.169.0) and the [Blowfish](https://blowfish.page) theme. Two appearances live in `assets/css/schemes/latte.css`: the navy of the original site (the light toggle) and cream-and-cocoa (the dark toggle).
+Homepage of Chaitanya Chhabra: https://chai314.github.io/
 
-## Local preview
-
-```sh
-hugo server
-```
-
-Then open http://localhost:1313/.
+Built with [Hugo](https://gohugo.io) (extended, 0.169.0) and the [Blowfish](https://blowfish.page) theme. Two appearances live in `assets/css/schemes/latte.css`: the navy of the original site (the light toggle) and cream-and-cocoa (the dark toggle).
 
 ## What is where
 
