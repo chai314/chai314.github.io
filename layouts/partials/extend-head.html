@@ -1,6 +1,6 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Shantell+Sans:ital,wght@0,400..600;1,400&display=swap" rel="stylesheet">
+{{/* The fonts are served from static/fonts (SIL Open Font License); the @font-face rules are in custom.css. */}}
+<link rel="preload" href="{{ "fonts/bricolage-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ "fonts/shantell-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
 {{- $od := slice -}}
 {{- range $k, $v := site.Params.overdrive }}{{ if $v }}{{ $od = $od | append $k }}{{ end }}{{ end }}
 <script>document.documentElement.dataset.world = "notebook"; document.documentElement.dataset.od = {{ delimit $od " " }};</script>

@@ -6,8 +6,8 @@
   <div class="grademap-row">
     <span class="grademap-year">{{ $y }}</span>
     <div class="grademap-cells">
-    {{- range hugo.Data.courses }}{{ if eq .year $y }}
-      <button type="button" class="gm-cell" data-grade="{{ .grade }}" data-area="{{ .area }}" data-code="{{ .code }}" data-name="{{ .name }}" aria-label="{{ .code }}, {{ .name }}, grade {{ .grade }}"></button>
+    {{- range $i, $c := hugo.Data.courses }}{{ if eq .year $y }}
+      <button type="button" class="gm-cell" data-grade="{{ .grade }}" data-area="{{ .area }}" data-course="{{ $i }}" data-code="{{ .code }}" data-name="{{ .name }}" aria-label="{{ .code }}, {{ .name }}, grade {{ .grade }}"></button>
     {{- end }}{{ end }}
     </div>
   </div>
@@ -18,8 +18,6 @@
     <span><i class="gm-cell" data-grade="AA"></i>AA, 10</span>
     <span><i class="gm-cell" data-grade="AB"></i>AB, 9</span>
     <span><i class="gm-cell" data-grade="BB"></i>BB, 8</span>
-    <span><i class="gm-cell" data-grade="BC"></i>BC, 7</span>
-    <span><i class="gm-cell" data-grade="CC"></i>CC, 6</span>
     <span><i class="gm-cell" data-grade="AU"></i>audit or pass</span>
   </figcaption>
 </figure>

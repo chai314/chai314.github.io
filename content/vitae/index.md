@@ -5,8 +5,6 @@ layout: "cv"
 aliases: ["/cv/"]
 showDate: false
 ---
-{{< katex >}}
-
 ## Education
 
 {{< cv title="B.Tech in Mathematics and Computing" org="Indian Institute of Technology Guwahati" when="2022 – 2026" kind="math" >}}
@@ -46,9 +44,7 @@ Final CPI **9.26 / 10**, with 313 credits earned over eight semesters.
 {{< cv title="Knot theory and lattice knots" org="B.Tech project (MA 498 and MA 499), Department of Mathematics, IIT Guwahati" when="2025 – 26" kind="math" link="/research/" >}}
 Supervised by **Prof. K. V. Srikanth**, with Srinjoy Som. Sixteen credits across two semesters, graded **AA** in both.
 
-The first half was a survey of the combinatorial group theory behind knot invariants: group presentations, Tietze transformations, and computing fundamental groups with the Seifert–van Kampen theorem. The second half was computational. A knot can be drawn as a closed self-avoiding polygon in the cubic lattice \\(\mathbb{Z}^3\\), and the question is how few unit edges a given knot type needs. We studied {{< unfold "minimal edge counts" >}}The trefoil needs exactly 24 edges, a theorem of Diao from 1993. Beyond the smallest knots the exact values are mostly open, and the general bounds in terms of crossing number leave a wide gap.{{< /unfold >}} and algorithmic tests for when two lattice polygons are the same knot.
-
-The project is continuing past the degree: numerical search for shorter embeddings, tighter analytic bounds, and extending results from knots to links.
+The first half was a survey of the combinatorial group theory behind knot invariants: group presentations, Tietze transformations, and computing fundamental groups with the Seifert–van Kampen theorem. The second half is computational, and is continuing past the degree.
 
 Code: [Latticeknots](https://github.com/srinjoysom11/Latticeknots)
 {{< /cv >}}
@@ -56,7 +52,7 @@ Code: [Latticeknots](https://github.com/srinjoysom11/Latticeknots)
 {{< stickers "sage latex github" >}}
 
 <!-- AIWROTE -->
-{{< cv title="Visiting Students' Research Programme" org="School of Mathematics, Tata Institute of Fundamental Research" where="conducted online" when="May – Jun 2024" kind="math" >}}
+{{< cv title="Visiting Students' Research Programme" org="School of Mathematics, Tata Institute of Fundamental Research" when="May – Jun 2024" kind="math" >}}
 One of **19 students** selected nationally for the mathematics programme, which ran from 20 May to 21 June 2024. A reading project on the **uniformisation theorem**: every simply connected Riemann surface is conformally the disc, the plane or the sphere.
 
 The route was through potential theory. Perron's method for subharmonic functions, then Green's functions and bipolar Green's functions on a Riemann surface, and from those the three-way classification. I presented the proof at the end of the programme. [More on the research page.](/research/#the-uniformisation-theorem)
@@ -172,7 +168,7 @@ A school-level academic tournament with around 50,000 entrants a year. Eight med
 ## Coursework
 
 <!-- AIWROTE -->
-Fifty-four courses from the transcript, one square each, in the order I took them. The stronger the colour, the better the grade.
+Fifty-three courses from the transcript, one square each, in the order I took them. The stronger the colour, the better the grade.
 
 {{< grademap >}}
 
@@ -180,7 +176,7 @@ Fifty-four courses from the transcript, one square each, in the order I took the
 {{< mn tilt="2" >}}Yes, basketball is on the transcript. Twice.{{< /mn >}}
 
 <!-- AIWROTE -->
-IIT Guwahati grades run AS and AA (10), AB (9), BB (8), BC (7), CC (6), down to DD (4). AS is given for exceptional performance. An audited course is attended in full and examined, but carries no credit.
+IIT Guwahati grades run AS and AA (10), AB (9), BB (8), down to DD (4). AS is given for exceptional performance. An audited course is attended in full and examined, but carries no credit.
 
 ### By area
 
@@ -251,14 +247,17 @@ Academic mentor to incoming Mathematics and Computing students for three years.
 {{< /cv >}}
 
 <!-- AIWROTE -->
-{{< cv title="Head of Creative and Content" org="Literary Society, IIT Guwahati" when="2024 – 26" kind="words" >}}
-Led the society's creative and content team. **Editor of SALSA 2025**, the institute's annual literary anthology. [The editorial is here.](https://chai314.github.io/UnpossibleCathexis/posts/nfas/)
+{{< cv title="Head Creative and Content Head" org="Literary Society, IIT Guwahati" when="2024 – 26" kind="words" >}}
+Founded **SALSA**, the institute's literary anthology, in 2025, and served as its editor for the year. [The editorial is here.](https://chai314.github.io/UnpossibleCathexis/posts/nfas/)
 {{< /cv >}}
 
 <!-- AIWROTE -->
 {{< mn tilt="-1.5" >}}The fiction itself is under [writing](https://chai314.github.io/UnpossibleCathexis/posts/).{{< /mn >}}
 
 ## Leadership and service
+
+<!-- AIWROTE -->
+{{< cv title="Founding member, Polygon" org="The Mathematics Society of IIT Guwahati" kind="math" >}}{{< /cv >}}
 
 <!-- AIWROTE -->
 {{< cv title="Coordinator, Acumen" org="Quiz Club, IIT Guwahati" when="2023 – 26" kind="life" >}}

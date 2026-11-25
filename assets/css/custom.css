@@ -4,6 +4,14 @@
    with the lattice knot lab on the home page and Monte Carlo pi behind the rest.
    ========================================================================== */
 
+/* ---------- Fonts (static/fonts) ---------- */
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400 800; font-display: swap; src: url("../fonts/bricolage-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Shantell Sans"; font-style: normal; font-weight: 400 600; font-display: swap; src: url("../fonts/shantell-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Shantell Sans"; font-style: italic; font-weight: 400; font-display: swap; src: url("../fonts/shantell-italic-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400 800; font-display: swap; src: url("../fonts/bricolage-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Shantell Sans"; font-style: normal; font-weight: 400 600; font-display: swap; src: url("../fonts/shantell-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Shantell Sans"; font-style: italic; font-weight: 400; font-display: swap; src: url("../fonts/shantell-italic-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
 :root {
   --ink: var(--color-neutral-800);
   --ink-soft: var(--color-neutral-600);
@@ -483,17 +491,18 @@ html[data-world="notebook"] .gm-cell { border-radius: 42% 58% 55% 45% / 50% 44% 
 /* vitae: the swatches keep their own original styles; this only stops the row overflowing */
 .row-container { box-sizing: border-box; max-width: calc(100% - 40px); }
 
-/* logo stickers: die-cut, tilted, in the margin on a wide screen and in a row on a narrow one */
+/* logo stickers: tilted, in the margin on a wide screen and in a row on a narrow one */
 .stickers { display: flex; flex-wrap: wrap; gap: 0.9rem 1.1rem; align-items: center; margin: 0.25rem 0 1.25rem; }
 .sticker {
   width: 3rem; height: 3rem; object-fit: contain; margin: 0 !important; border-radius: 0 !important;
   transform: rotate(var(--tilt, -6deg));
-  filter: drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff) drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff) drop-shadow(0 5px 6px rgb(0 0 0 / 0.35));
+  filter: drop-shadow(0 5px 6px rgb(0 0 0 / 0.35));
   transition: transform 0.5s var(--ease-out);
 }
-/* single-colour black marks are flipped to white instead of outlined, so thin strokes survive */
+/* single-colour black marks are flipped to white */
 .sticker.is-mono { filter: invert(1) drop-shadow(0 5px 6px rgb(0 0 0 / 0.35)); }
-.sticker.is-plain { filter: drop-shadow(0 5px 6px rgb(0 0 0 / 0.35)); }
+/* Sage is white on a black square: screened, only the white shows */
+.sticker.is-screen { filter: none; mix-blend-mode: screen; }
 .sticker.is-wide { width: 5.5rem !important; }
 .sticker:hover { transform: rotate(calc(var(--tilt, -6deg) * -0.6)) scale(1.12); }
 @media (min-width: 1280px) {
@@ -624,6 +633,7 @@ html[data-od~="vitae"] .cv-entry::before { content: none; }
 @keyframes od-draw { to { stroke-dashoffset: 0; } }
 html[data-od~="vitae"] .cv-title, html[data-od~="vitae"] .course-title { position: relative; }
 .od-ghost { transition: none !important; position: fixed; left: 0; top: 0; z-index: 60; pointer-events: none; will-change: transform; box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.45); }
+.od-ghost.is-landing { box-shadow: none; }
 html[data-od~="vitae"] .course.is-marked .course-grade { animation: od-stamp 0.5s var(--ease-out); }
 @keyframes od-stamp { from { transform: scale(1.6); } }
 @media (prefers-reduced-motion: reduce) {
@@ -661,3 +671,76 @@ html.is-draggy .draggy-piece.is-held { position: relative; z-index: 25; }
 @keyframes ic-sway { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(1.4px); } }
 @keyframes ic-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes ic-set { from { transform: translateY(-2px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* --- header on a phone: icons big enough for a thumb --- */
+.mobile-header-row { gap: 0.15rem; }
+.mobile-header-row > :is(button, label) { min-width: 2.75rem; min-height: 2.75rem; }
+.mobile-header-row > :is(button, label) .icon svg { width: 1.45rem; height: 1.45rem; }
+#appearance-switcher-mobile .icon svg { width: 1.75rem; height: 1.75rem; }
+
+/* --- 404: an unknot (layouts/404.html) --- */
+.lost { display: grid; gap: 1.5rem 4rem; align-items: center; padding-block: 3rem 4rem; }
+@media (min-width: 768px) { .lost { grid-template-columns: minmax(0, 24rem) minmax(0, 1fr); min-height: 60vh; } }
+.lost-fig { display: grid; justify-items: center; gap: 0.5rem; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; }
+.lost-fig svg { width: 100%; max-width: 24rem; overflow: visible; }
+.lost-fig path { fill: none; stroke-linejoin: round; }
+.lost-ink { stroke: rgb(var(--ink)); stroke-width: 17; }
+.lost-core { stroke: rgb(var(--paper)); stroke-width: 11; }
+.lost-gap { stroke: rgb(var(--paper)); stroke-width: 29; }
+.lost-cap { font-family: var(--hand); font-size: 1.1rem; color: rgb(var(--accent-ink)); }
+.lost-text h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; line-height: 1.05; margin: 0; }
+.lost-text p { margin: 1rem 0 0; max-width: 34rem; color: rgb(var(--ink-soft)); line-height: 1.6; }
+.lost-links { display: flex; gap: 0.6rem; }
+.lost-links .chip { text-decoration: none; }
+
+/* --- research: the counting sentence (assets/js/walks.js) ------------- */
+.walks { position: relative; margin: 1rem 0; max-width: 42rem; }
+/* the height is fixed and the air below takes up the slack, so nothing under it jumps as the sentence grows */
+.walks.is-live { display: flex; flex-direction: column; min-height: 11rem; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+@media (max-width: 640px) { .walks.is-live { min-height: 14.5rem; } }
+.walks [hidden] { display: none; }
+.walks-air { flex: 1 0 5rem; }
+.walks[data-in="1"] .walks-air { flex-basis: 3.5rem; }
+.walks[data-in="2"] .walks-air { flex-basis: 0; }
+.walks-line { margin: 0; font-family: var(--display); font-size: clamp(1.05rem, 2.6vw, 1.2rem); line-height: 2.5; color: rgb(var(--ink)); }
+.walks-value { display: block; font-size: 1.22em; line-height: 1.4; font-weight: 600; letter-spacing: 0.01em; font-variant-numeric: tabular-nums; color: rgb(var(--accent-ink)); overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; }
+.walks-value sup { font-size: 0.62em; line-height: 0; vertical-align: 0.45em; }
+
+/* where a phrase goes: an insertion caret, then a gap, then the phrase */
+.walks-slot { position: relative; display: inline-block; width: 0; height: 1.5em; vertical-align: middle; margin-inline: -0.14em; border-radius: 6px; outline: 1.5px dashed transparent; outline-offset: -1px; }
+.walks-slot > span { display: block; width: 100%; height: 100%; line-height: 1.5; overflow: hidden; white-space: nowrap; color: transparent; }
+.is-live .walks-slot::after {
+  content: ""; position: absolute; left: 50%; bottom: -0.22em; width: 0.42em; height: 0.42em; margin-left: -0.21em;
+  border: solid rgb(var(--accent)); border-width: 2px 0 0 2px; transform: rotate(45deg) skew(9deg, 9deg);
+}
+.is-live .walks-slot:is(.is-full, .is-open)::after { content: none; }
+.walks-slot:is(.is-full, .is-open) { margin-inline: 0; }
+.walks-slot.is-open { width: 4.5rem; outline-color: rgb(var(--accent)); }
+.walks-slot.is-near { background: rgba(var(--accent), 0.28); outline-style: solid; }
+
+/* the phrases: slips of paper adrift below the sentence */
+.walks-phrase {
+  position: absolute; left: 0; top: 0; z-index: 3; padding: 0.28em 0.7em; border: 1px solid rgb(var(--rule)); border-radius: 5px;
+  background: rgb(var(--paper-2)); box-shadow: 0 10px 18px -8px rgba(0, 0, 0, 0.45); cursor: grab;
+  font-family: var(--hand); font-size: clamp(1rem, 2.6vw, 1.15rem); line-height: 1.25; white-space: nowrap; color: rgb(var(--accent-ink));
+  touch-action: none; will-change: transform;
+}
+.walks-phrase::before { content: ""; position: absolute; inset: -0.45rem; }   /* a fingertip's worth of target */
+.walks-phrase:hover { border-color: rgb(var(--accent)); }
+.walks-phrase.is-held { cursor: grabbing; z-index: 5; border-color: rgb(var(--accent)); box-shadow: 0 18px 26px -10px rgba(0, 0, 0, 0.5); }
+.walks-phrase.is-in { padding: 0.28em 0.2em; border-color: transparent; background: none; box-shadow: none; }
+.walks-phrase.is-in:is(:hover, :focus-visible, .is-held) { background: rgba(var(--accent), 0.2); border: 1px dashed rgb(var(--accent)); }   /* it comes out again */
+.walks.is-carrying, .walks.is-carrying * { cursor: grabbing; }
+.walks-long, .walks-phrase.is-in .walks-short { display: none; }
+.walks-phrase.is-in .walks-long { display: inline-block; }
+
+/* n: a wheel */
+.walks-n { font-weight: 600; font-variant-numeric: tabular-nums; color: rgb(var(--accent-ink)); }
+.is-live .walks-n { position: relative; display: inline-block; width: 1.5em; height: 1.2em; line-height: 1.2; margin-inline: 0.1em; vertical-align: -0.2em; cursor: ns-resize; touch-action: none; }
+.is-live .walks-n::before { content: ""; position: absolute; inset: -0.75em -0.5em; }
+.walks-n-say { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.walks-row { position: absolute; inset: 0; text-align: center; pointer-events: none; will-change: transform; }
+@media (prefers-reduced-motion: no-preference) {
+  .walks-slot { transition: width 0.26s var(--ease-out), background-color 0.15s; }
+  .walks-phrase { transition: box-shadow 0.2s, border-color 0.15s, background-color 0.15s; }
+}

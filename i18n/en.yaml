@@ -1,0 +1,5 @@
+# The theme switch's hover text. "Dark" is the coffee scheme, "light" the navy one.
+# AIWROTE
+footer:
+  dark_appearance: "Switch to Coffee"
+  light_appearance: "Switch to Ocean"

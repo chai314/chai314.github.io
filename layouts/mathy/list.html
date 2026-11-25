@@ -1,0 +1,6 @@
+{{ define "main" }}
+  {{/* The rows come from `rows` in content/mathy/_index.md */}}
+  <header><h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1></header>
+  <section class="prose dark:prose-invert max-w-prose mt-6 mb-10">{{ .Content }}</section>
+  <section class="w-full">{{ partial "rows.html" .Params.rows }}</section>
+{{ end }}

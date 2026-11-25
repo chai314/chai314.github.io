@@ -7,9 +7,6 @@ showTableOfContents: true
 sitemap:
   disable: true
 ---
-{{< katex >}}
-
-
 Every custom piece on this site is a Hugo shortcode, so it works in any page's Markdown. Each one is shown here, followed by the line that makes it. Copy the line, change the words. This page is not in the menu.
 
 ## Section underline
@@ -89,6 +86,15 @@ Course lists and the grade map are drawn from `data/courses.yaml`. Each course i
 
 ```text
 {{</* surfaces */>}}
+```
+
+<!-- AIWROTE -->
+## The counting sentence
+
+{{< walks >}}
+
+```text
+{{</* walks */>}}     settings: [walks] in params.toml
 ```
 
 ## Logo stickers

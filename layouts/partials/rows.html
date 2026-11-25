@@ -1,0 +1,12 @@
+{{- /* Rows of links. Takes a list of items: title, page (on this site) or url, blurb, tag. */ -}}
+<ol class="now-list">
+  {{- range . }}
+  <li class="now-item">
+    <a href="{{ with .url }}{{ . }}{{ else }}{{ .page | relURL }}{{ end }}">
+      <span class="now-name">{{ .title }}</span>
+      <span class="now-blurb">{{ .blurb }}</span>
+      {{ with .tag }}<span class="now-tag">{{ . }}</span>{{ end }}
+    </a>
+  </li>
+  {{- end }}
+</ol>
