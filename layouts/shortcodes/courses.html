@@ -2,9 +2,9 @@
        Hovering (or tapping) a course wiggles its name and slides out the book it followed. */ -}}
 {{- $area := .Get "area" -}}{{- $year := .Get "year" -}}
 <ul class="course-list not-prose">
-{{- range hugo.Data.courses -}}
+{{- range $i, $c := hugo.Data.courses -}}
   {{- if or (and $area (eq .area $area)) (and $year (eq .year $year)) }}
-  <li class="course{{ if .text }} has-book{{ end }}" data-grade="{{ .grade }}"{{ if .text }} tabindex="0"{{ end }}>
+  <li class="course{{ if .text }} has-book{{ end }}" data-grade="{{ .grade }}" data-course="{{ $i }}"{{ if .text }} tabindex="0"{{ end }}>
     <span class="course-code">{{ .code }}</span>
     <span class="course-name"><span class="course-title">{{ .name }}</span>{{ with .text }}<span class="course-text"><span>{{ . }}</span></span>{{ end }}{{ with .note }}<span class="course-note hand">{{ . }}</span>{{ end }}</span>
     <span class="course-credits">{{ if $area }}{{ .year }}{{ else if gt .credits 0 }}{{ .credits }} cr{{ end }}</span>

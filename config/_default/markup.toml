@@ -5,3 +5,9 @@
 [tableOfContents]
   startLevel = 2
   endLevel = 3
+# maths: \\( inline \\) and \\[ display \\], set by layouts/_default/_markup/render-passthrough.html
+[goldmark.extensions.passthrough]
+  enable = true
+  [goldmark.extensions.passthrough.delimiters]
+    inline = [['\\(', '\\)']]
+    block = [['\\[', '\\]']]

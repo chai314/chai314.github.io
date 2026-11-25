@@ -1,4 +1,5 @@
 colorScheme = "latte"
+images = ["og.png"]        # link previews (static/og.png)
 defaultAppearance = "light"
 autoSwitchAppearance = true
 enableSearch = true
@@ -128,3 +129,10 @@ disableTextInHeader = false
     .home .scrap .fig, .home .hero-name, .home .hero-sub, .home .hero-intro > *, .home .hero-links,
     .home .knot-lab, .home .now-title, .home .now-item, .home .now-more
   """
+
+# The counting sentence on the research page ({{< walks >}}). The code is assets/js/walks.js.
+[walks]
+  n = 34                 # the length it opens with
+  max = 40               # longest walk; the tables in walks.js end at 40
+  drift = 22             # px the loose phrases wander
+  est = "≈"             # put in front of counts nobody has computed exactly

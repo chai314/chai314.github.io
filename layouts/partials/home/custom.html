@@ -35,7 +35,7 @@
 
     <figure class="knot-lab" id="knot-lab">
       {{/* AIWROTE */}}
-      <canvas id="knot-canvas" aria-label="A knot drawn on the cubic lattice, tightening itself by random moves. Drag to rotate{{ if site.Params.overdrive.knot }}, or drag the rope itself to pull it loose{{ end }}." role="img"></canvas>
+      <canvas id="knot-canvas" aria-label="A knot drawn on the cubic lattice, tightening itself by random moves. Arrow keys turn it. Drag to rotate{{ if site.Params.overdrive.knot }}, or drag the rope itself to pull it loose{{ end }}." role="application" aria-roledescription="drawing you can turn"></canvas>
       <figcaption class="knot-panel">
         <div class="knot-readout">
           {{/* AIWROTE */}}
@@ -53,7 +53,7 @@
           <button type="button" class="chip" id="knot-pause" aria-pressed="false">Pause</button>
         </div>
         {{/* AIWROTE */}}
-        <p class="knot-note">A knot as a polygon in ℤ³, shortened live by random BFACF moves, which never change the knot type. How short each knot can get is <a href="{{ "research/" | relURL }}">what I work on</a>. Drag to turn it{{ if site.Params.overdrive.knot }}, or take hold of the rope and pull{{ end }}.</p>
+        <p class="knot-note">A knot as a polygon in ℤ³, shortened live by random BFACF moves, which never change the knot type. Knots like these are <a href="{{ "research/" | relURL }}">what I work on</a>. Drag to turn it{{ if site.Params.overdrive.knot }}, or take hold of the rope and pull{{ end }}.</p>
       </figcaption>
     </figure>
   </section>
@@ -61,25 +61,7 @@
   <section class="now">
     {{/* AIWROTE */}}
     <h2 class="now-title">On the desk</h2>
-    <ol class="now-list">
-      {{/* AIWROTE */}}
-      {{- $items := slice
-        (dict "page" "research" "title" "Lattice knots" "blurb" "How few unit edges does a knot need when it is drawn as a polygon in the cubic lattice? Numerical search from one side, analytic bounds from the other." "tag" "research")
-        (dict "url" "https://chai314.github.io/UnpossibleCathexis/posts/one/" "title" "On the derivative of a linear operator" "blurb" "A pedantic prescription to purge a pet peeve. Written in vengeance, after a quiz." "tag" "mathy")
-        (dict "url" "https://chai314.github.io/UnpossibleCathexis/posts/two/" "title" "Gödel, Ludwig, Lean" "blurb" "The three-week course on logic, metamathematics and theorem proving I ran for the maths society. The whole course document, readable in place." "tag" "mathy")
-        (dict "url" "https://chai314.github.io/UnpossibleCathexis/posts/" "title" "Fiction, and other nonsense" "blurb" "Short stories, an anthology editorial, and a non-fictional record of one Inter-IIT trip. Style over substance. Style is substance." "tag" "writing")
-      -}}
-      {{- range $items }}
-      <li class="now-item">
-        <a href="{{ with .url }}{{ . }}{{ else }}{{ .page | relURL }}/{{ end }}">
-          <span class="now-name">{{ .title }}</span>
-          <span class="now-blurb">{{ .blurb }}</span>
-          <span class="now-tag">{{ .tag }}</span>
-        </a>
-      </li>
-      {{- end }}
-    </ol>
-    {{/* AIWROTE */}}
-    <p class="now-more">The long version of everything is in the <a href="{{ "vitae/" | relURL }}">vitae</a>, which has no page limit and behaves accordingly.</p>
+    {{/* The rows come from `desk` in content/_index.md */}}
+    {{ partial "rows.html" .Params.desk }}
   </section>
 </article>

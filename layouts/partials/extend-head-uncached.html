@@ -1,0 +1,7 @@
+{{- /* KaTeX's stylesheet, only on pages whose content has maths (see _markup/render-passthrough.html). */ -}}
+{{- with .Content }}{{ end -}}
+{{- if .Page.Store.Get "hasMath" }}
+{{- $css := resources.Get "lib/katex/katex.min.css" | resources.Fingerprint "sha512" }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- range resources.Match "lib/katex/fonts/*.woff2" }}{{ .Publish }}{{ end }}
+{{- end }}

@@ -1,0 +1,53 @@
+{{ define "main" }}
+  {{/* The figure is a limaçon, (b + a cos t)(cos t, sin t): with a > b it has one crossing and looks
+       knotted, and as a shrinks the loop slips out (a Reidemeister I move), leaving a circle. */}}
+  <section class="lost">
+    <button type="button" class="lost-fig" aria-label="A closed loop with one crossing. Press to undo it.">
+      <svg viewBox="-130 -150 270 300" aria-hidden="true">
+        <path class="lost-ink"/><path class="lost-core"/><path class="lost-gap"/><path class="lost-ink"/><path class="lost-core"/>
+      </svg>
+      {{/* AIWROTE */}}
+      <span class="hand lost-cap" data-tied="fig. 404: a page." data-undone="fig. 404: a page? not!">fig. 404: a page.</span>
+    </button>
+    <div class="lost-text">
+      {{/* AIWROTE */}}
+      <h1>There is no page here.</h1>
+      {{/* AIWROTE */}}
+      <p>It looked like something, but it was the unknot all along. One Reidemeister move and there is nothing left. Try it.</p>
+      {{/* AIWROTE */}}
+      <p class="lost-links"><a class="chip" href="{{ "/" | relURL }}">Back home</a> <a class="chip" href="{{ "vitae/" | relURL }}">The vitae</a></p>
+    </div>
+  </section>
+  <script>
+  (function () {
+    var fig = document.querySelector(".lost-fig"), P = fig.querySelectorAll("path"), cap = fig.querySelector(".lost-cap");
+    var s = 1, goal = 1, raf = 0, still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function arc(a, b, from, to) {
+      var d = "", k, N = 160;
+      for (k = 0; k <= N; k++) {
+        var t = from + (to - from) * k / N, r = b + a * Math.cos(t);
+        d += (k ? "L" : "M") + (r * Math.cos(t) - a * 0.5).toFixed(2) + " " + (r * Math.sin(t)).toFixed(2);
+      }
+      return d;
+    }
+    function draw() {
+      var a = 132 * s, b = 92 - 36 * s, all = arc(a, b, 0, 2 * Math.PI) + "Z";
+      P[0].setAttribute("d", all); P[1].setAttribute("d", all);
+      var over = a > b + 0.5 ? Math.acos(-b / a) : null;       // where the strand crosses itself
+      P[2].setAttribute("d", over === null ? "" : arc(a, b, over - 0.13, over + 0.13));
+      P[3].setAttribute("d", over === null ? "" : arc(a, b, over - 0.2, over + 0.2));
+      P[4].setAttribute("d", over === null ? "" : arc(a, b, over - 0.23, over + 0.23));
+    }
+    function step() {
+      raf = 0; s += (goal - s) * 0.13;
+      if (still || Math.abs(goal - s) < 0.002) s = goal;
+      draw(); if (s !== goal) raf = requestAnimationFrame(step);
+    }
+    fig.addEventListener("click", function () {
+      goal = goal ? 0 : 1; cap.textContent = cap.getAttribute(goal ? "data-tied" : "data-undone");
+      if (!raf) raf = requestAnimationFrame(step);
+    });
+    draw();
+  })();
+  </script>
+{{ end }}

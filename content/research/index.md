@@ -4,18 +4,19 @@ description: "I've always been awed by all the word 'research' implies and encap
 showDate: false
 showTableOfContents: true
 ---
-{{< katex >}}
+## A normal form and bounds for minimal knots on the lattice
 
-## Minimal lattice knots
+<!-- AIWROTE -->
+*B.Tech project (MA 498 and MA 499), Department of Mathematics, IIT Guwahati, 2025 to the present (ongoing). Supervised by Prof. K. V. Srikanth, with Srinjoy Som.*
 
-*B.Tech project (MA 498 and MA 499), Department of Mathematics, IIT Guwahati, 2025 to the present. Supervised by Prof. K. V. Srikanth, with Srinjoy Som.*
+{{< walks >}}
 
 Stay tuned!
 
 ## The uniformisation theorem
 
 <!-- AIWROTE -->
-*Visiting Students' Research Programme, School of Mathematics, Tata Institute of Fundamental Research. 20 May to 21 June 2024, conducted online.*
+*Visiting Students' Research Programme, School of Mathematics, Tata Institute of Fundamental Research, Colaba, Mumbai. 20 May to 21 June 2024.*
 
 <!-- AIWROTE -->
 Nineteen students were selected nationally for the mathematics programme that year. Mine was a reading project that ended in a talk.

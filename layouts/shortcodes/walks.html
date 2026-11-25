@@ -1,0 +1,10 @@
+{{- /* A sentence that counts walks on the cubic lattice. Two loose phrases float below it and
+       slot into it; n is a wheel. The code is assets/js/walks.js, the settings are [walks] in
+       params.toml. The sentence and both phrases are the owner's words. */ -}}
+<div class="walks not-prose" data-walks>
+  <p class="walks-line">The number of <span class="walks-slot" data-slot="avoid"><span></span></span> lattice walks of length <span class="walks-n" role="spinbutton" tabindex="0" aria-label="n, the length of the walk">34</span> <span class="walks-slot" data-slot="closed"><span></span></span> in 3D is <span class="walks-value">286,511,799,958,070,431,838,109,696</span></p>
+  <div class="walks-air" hidden></div>
+  <button type="button" class="walks-phrase" data-phrase="avoid" aria-pressed="false" hidden><span>self-avoiding</span></button>
+  <button type="button" class="walks-phrase" data-phrase="closed" aria-pressed="false" hidden><span class="walks-short">start = end</span><span class="walks-long">that start where they end</span></button>
+  <p class="sr-only" aria-live="polite" data-walks-live></p>
+</div>

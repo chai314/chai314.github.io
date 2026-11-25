@@ -8,7 +8,7 @@
   {{- with resources.GetMatch (printf "img/skills/%s.*" (lower $n)) }}
   {{- $tilt := index $tilts (mod (add $i $start) 6) }}
   {{- if and (eq $i 0) ($.Get "tilt") }}{{ $tilt = $.Get "tilt" }}{{ end }}
-  <img class="sticker{{ if in (slice "sage" "github" "streamlit") (lower $n) }} is-mono{{ end }}{{ if eq (lower $n) "latex" }} is-wide is-plain{{ end }}" src="{{ .RelPermalink }}" alt="{{ $n }}" title="{{ $n }}" loading="lazy" style="--tilt: {{ $tilt }}deg">
+  <img class="sticker{{ if in (slice "github" "streamlit") (lower $n) }} is-mono{{ end }}{{ if eq (lower $n) "sage" }} is-screen{{ end }}{{ if eq (lower $n) "latex" }} is-wide{{ end }}" src="{{ .RelPermalink }}" alt="{{ $n }}" title="{{ $n }}" loading="lazy" style="--tilt: {{ $tilt }}deg">
   {{- else }}
   {{- warnf "stickers: no file assets/img/skills/%s.*" $n }}
   {{- end }}

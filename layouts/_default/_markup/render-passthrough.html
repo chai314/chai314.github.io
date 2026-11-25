@@ -1,0 +1,6 @@
+{{- /* Maths is set when the site is built, so pages carry no KaTeX script. Write \( ... \) inline, \[ ... \] on its own line. */ -}}
+{{- $opts := dict "displayMode" (eq .Type "block") "output" "htmlAndMathml" -}}
+{{- with try (transform.ToMath .Inner $opts) -}}
+  {{- with .Err -}}{{- errorf "maths in %s: %s" $.Page.File.Path . -}}{{- else -}}{{- .Value -}}{{- end -}}
+{{- end -}}
+{{- .Page.Store.Set "hasMath" true -}}

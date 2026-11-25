@@ -231,45 +231,62 @@
       }
       return bestI;
     }
-    /* Pull: BFACF moves forced on the edges at the held vertex, in the lattice direction
-       the pointer is asking for. They are still BFACF moves, so the knot type is safe,
-       and the rope cannot pass through itself. */
+    /* Pull: BFACF moves on the edges around the held vertex. Every legal move there is tried on
+       paper, and the one that brings the rope closest to the pointer as it looks on screen is made,
+       whichever of the six lattice directions that takes. If nothing gets closer because another
+       strand is in the way, the rope lifts over it (towards the reader, or failing that away) and
+       tries again. They are still BFACF moves, so the knot type is safe, and the rope cannot pass
+       through itself. */
+    var lifts = 0, liftX = 0, liftY = 0;
     function pull() {
       var v = state.v, project = projector();
+      if (Math.abs(px - liftX) + Math.abs(py - liftY) > view.unit) { lifts = 0; liftX = px; liftY = py; }
+      var far = function (p) { var q = project(p[0], p[1], p[2]); return [Math.sqrt((q[0] - px) * (q[0] - px) + (q[1] - py) * (q[1] - py)) / (view.unit * q[3]), q[2]]; };
       // up to three moves a frame, so the rope keeps up with a quick hand
       for (var rep = 0; rep < 3; rep++) {
         var n = v.length;
         if (grab >= n) grab = n - 1;
         var w = v[grab], q = project(w[0], w[1], w[2]), u = view.unit * q[3];
         var dx = (px - q[0]) / u, dy = -(py - q[1]) / u, len = Math.sqrt(dx * dx + dy * dy);
-        var wv = [dx * view.r[0] + dy * view.u[0], dx * view.r[1] + dy * view.u[1], dx * view.r[2] + dy * view.u[2]];
         if (rep === 0) {
           var s = len > 0 ? Math.min(0.42, len * 0.5) / len : 0;
-          pullOff = [wv[0] * s, wv[1] * s, wv[2] * s];
+          pullOff = [0, 1, 2].map(function (k) { return (dx * view.r[k] + dy * view.u[k]) * s; });
         }
         if (len < 0.6) return;
-        // every lattice direction that points at all towards the pointer, best first, on the two
-        // edges at the held vertex and then the two beyond them: something nearly always gives
-        var order = [0, 1, 2].sort(function (a, b) { return Math.abs(wv[b]) - Math.abs(wv[a]); });
-        var moved = false, room = n < Math.max(startLen, 140) + 90 ? 1 : 0;
-        var edges = Math.random() < 0.5 ? [grab - 1, grab, grab - 2, grab + 1] : [grab, grab - 1, grab + 1, grab - 2];
-        for (var a = 0; a < 3 && !moved; a++) {
-          var ax = order[a];
-          if (Math.abs(wv[ax]) < 0.2 * len) break;
-          var d = [0, 0, 0]; d[ax] = wv[ax] > 0 ? 1 : -1;
-          for (var t = 0; t < 4 && !moved; t++) moved = bfacf(state, room, hot, frame, edges[t], d) !== null;
+        var room = n < Math.max(startLen, 140) + 140, best = null, lift = null;
+        for (var o = -3; o <= 2; o++) {
+          var i = (((grab + o) % n) + n) % n, A = v[i], B = v[(i + 1) % n], P = v[(i - 1 + n) % n], Q = v[(i + 2) % n];
+          for (var t = 0; t < 6; t++) {
+            var d = DIRS[t];
+            if ((B[0] - A[0]) * d[0] + (B[1] - A[1]) * d[1] + (B[2] - A[2]) * d[2] !== 0) continue;
+            var a2 = [A[0] + d[0], A[1] + d[1], A[2] + d[2]], b2 = [B[0] + d[0], B[1] + d[1], B[2] + d[2]];
+            var pa = same(P, a2), qb = same(Q, b2);
+            if (pa && qb ? n <= 4 : (!pa && state.occ.has(key(a2))) || (!qb && state.occ.has(key(b2)))) continue;
+            if (!pa && !qb && !room) continue;
+            var fa = far(a2), fb = far(b2), near = fa[0] <= fb[0] ? fa : fb;
+            var gain = len - near[0] - (pa && qb ? -0.05 : pa || qb ? 0 : 0.05);   // given the choice, the move that uses less rope
+            var m = { i: i, d: d, to: near === fa ? a2 : b2, gain: gain, z: near[1] - q[2] };
+            if (!best || gain > best.gain) best = m;
+            if ((o === -1 || o === 0) && Math.abs(m.z) > 0.3 && near[0] < len + 0.75 && (!lift || m.z < lift.z)) lift = m;
+          }
         }
-        if (!moved) return;
-        // the held vertex may have been replaced or renumbered: take the nearest one close by on the rope
-        n = v.length;
-        var bestI = grab % n, bestD = Infinity;
-        for (var o = -4; o <= 4; o++) {
-          var j = (((grab + o) % n) + n) % n, pj = project(v[j][0], v[j][1], v[j][2]);
-          var dd = (pj[0] - px) * (pj[0] - px) + (pj[1] - py) * (pj[1] - py);
-          if (dd < bestD) { bestD = dd; bestI = j; }
-        }
-        grab = bestI;
+        var go = best && best.gain > 0.12 ? best : null;
+        if (go) lifts = 0;
+        else if (lift && len > 1.5 && lifts < 4) { go = lift; lifts++; }
+        if (!go) { if (!room) gather(); return; }
+        bfacf(state, 1, hot, frame, go.i, go.d);
+        for (var j = 0; j < v.length; j++) if (same(v[j], go.to)) { grab = j; break; }
       }
+      if (v.length > Math.max(startLen, 140) + 90) gather();
+    }
+    /* A long pull runs out of rope: take up slack far from the hand. */
+    function gather() {
+      var v = state.v, held = v[grab];
+      for (var t = 0; t < 80; t++) {
+        var i = (Math.random() * v.length) | 0;
+        if (ring(i, v.indexOf(held), v.length) > 8) bfacf(state, 0, hot, -1e9, i);
+      }
+      grab = v.indexOf(held);
     }
     function drawRope(project, unit) {
       var v = state.v, n = v.length, i, k, e = reduceMotion ? 1 : 0.75;   // moves land almost at once: snappy, with the corner taken off
@@ -333,7 +350,7 @@
       var v = state.v, n = v.length, i;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
-      var b = bounds(), e = reduceMotion ? 1 : 0.06;
+      var b = bounds(), e = grab != null ? 0 : reduceMotion ? 1 : 0.06;   // the view holds still under a pull, and catches up after
       cam.cx += (b.cx - cam.cx) * e; cam.cy += (b.cy - cam.cy) * e; cam.cz += (b.cz - cam.cz) * e; cam.r += (b.r - cam.r) * e;
       var project = projector(), unit = view.unit;
       if (rope) { drawRope(project, unit); return; }
@@ -470,7 +487,19 @@
     resize();
     setRunning();
     draw();
-    window.__knot = { state: function () { return state; }, best: function () { return best; }, step: step, load: load, tick: function () { running = true; resize(); tick(); } };
+    window.__knot = { state: function () { return state; }, best: function () { return best; }, step: step, load: load,
+      // for tests: hold vertex i, pull it by (dx, dy) px for some frames, and say how far short it stopped, in lattice units
+      tug: function (i, dx, dy, frames, y, p) {
+        if (y != null) { yaw = y; pitch = p; }
+        snapCamera(); resize(); draw();
+        grab = i % state.v.length; var c = projector()(state.v[grab][0], state.v[grab][1], state.v[grab][2]);
+        px = c[0] + dx; py = c[1] + dy; var n0 = state.v.length;
+        for (var f = 0; f < frames; f++) { frame++; pull(); }
+        var w = state.v[grab], q = projector()(w[0], w[1], w[2]), u = view.unit * q[3];
+        var out = { gap: Math.sqrt((px - q[0]) * (px - q[0]) + (py - q[1]) * (py - q[1])) / u, grew: state.v.length - n0, distinct: new Set(state.v.map(key)).size === state.v.length };
+        grab = null; pullOff = null; return out;
+      },
+      tick: function () { running = true; resize(); tick(); } };
   }
 
   /* ------------------------------------------------------------------ */
@@ -607,7 +636,9 @@
   function initCV() {
     var page = $(".cv-page");
     if (!page) return;
-    var list = $("#cv-rail-list"), heads = $$(".cv-content h2");
+    // sections that are not part of the CV proper stay out of the bar
+    var OFF_RAIL = ["Odds and ends"];
+    var list = $("#cv-rail-list"), heads = $$(".cv-content h2").filter(function (h) { return OFF_RAIL.indexOf(h.textContent.replace(/#\s*$/, "").trim()) < 0; });
     var links = heads.map(function (h) {
       var li = document.createElement("li"), a = document.createElement("a");
       // Blowfish keeps the heading id on an empty <div class="anchor"> inside the heading
@@ -690,36 +721,51 @@
       void svg.getBoundingClientRect(); svg.classList.add("is-on");
     }
 
-    /* A grade square, clicked, flies down to its row in the course list and stamps the grade. */
+    /* A grade square, clicked, flies down to its row in the course list and stamps the grade.
+       Every square does the same: its row under "By area" if it has one, else its row under
+       "By year" (opening whichever tab or year that is in), and the row opens to show its book. */
+    var flight = 0;
     function flyToCourse(cell) {
-      var rows = $$(".course").filter(function (r) { return $(".course-code", r).textContent.trim() === cell.dataset.code; });
-      var row = rows.filter(function (r) { return r.closest(".tab__panel"); })[0];
-      if (row) {
-        var panel = row.closest(".tab__panel"), tab = $$(".tab__button", panel.closest(".tab__container"))[+panel.dataset.tabIndex];
-        if (tab && !panel.classList.contains("tab--active")) tab.click();
-      } else row = rows.filter(function (r) { return r.offsetParent; })[0];
-      if (!row || !row.offsetParent) return;
-      var target = $(".course-grade", row);
+      var rows = $$('.course[data-course="' + cell.dataset.course + '"]'), mine = ++flight;
+      $$(".od-ghost").forEach(function (o) { o.remove(); });
+      var row = rows.filter(function (r) { return r.closest(".tab__panel"); })[0] || rows[0];
+      if (!row) return;
+      var panel = row.closest(".tab__panel"), fold = row.closest("details");
+      if (panel && !panel.classList.contains("tab--active")) {
+        var tab = $$(".tab__button", panel.closest(".tab__container"))[+panel.dataset.tabIndex];
+        if (tab) tab.click();
+      }
+      if (fold) fold.open = true;
+      $$(".course.is-marked").forEach(function (o) { o.classList.remove("is-marked", "is-open"); });
+      $$('.od-pencil[data-group="course"]').forEach(function (o) { o.remove(); });
+      if (row.classList.contains("has-book")) row.classList.add("is-open");
+      var target = $(".course-grade", row), still = false;
       var land = function () {
-        $$(".course.is-marked").forEach(function (o) { o.classList.remove("is-marked"); });
+        if (mine !== flight) return;      // another square was clicked meanwhile
         void row.offsetWidth; row.classList.add("is-marked");
         pencil($(".course-title", row), "course");
       };
-      var scrolled = glide(row, "course");
+      var scrolled = glide(row, "course").then(function () { still = true; });
       if (reduceMotion) { scrolled.then(land); return; }
-      $$(".od-ghost").forEach(function (o) { o.remove(); });
-      var ghost = document.createElement("i");
+      // the square stays a square all the way: it lifts, arcs over, and shrinks into the badge
+      var side = cell.offsetWidth, ghost = document.createElement("i");
       ghost.className = "gm-cell od-ghost"; ghost.dataset.grade = cell.dataset.grade;
+      ghost.style.width = ghost.style.height = side + "px";
       document.body.appendChild(ghost);
-      var t0 = performance.now(), D = 720;
+      var mid = function (el) { var r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+      var t0 = performance.now(), D = 680, hit = 0;
       (function frame(now) {
-        var t = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - t, 3);
-        var a = cell.getBoundingClientRect(), b = target.getBoundingClientRect();
-        var w = a.width + (b.width - a.width) * e, h = a.height + (b.height - a.height) * e;
-        var x = a.left + (b.left - a.left) * e, y = a.top + (b.top - a.top) * e - Math.sin(Math.PI * e) * 34;
-        ghost.style.width = w + "px"; ghost.style.height = h + "px";
-        ghost.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px)";
-        if (t < 1) requestAnimationFrame(frame); else { ghost.remove(); scrolled.then(land); }
+        if (mine !== flight) return;
+        var t = Math.max(0, Math.min(1, (now - t0) / D)), e = t < 0.5 ? 4 * t * t * t : 1 - 4 * Math.pow(1 - t, 3);
+        // it waits on its badge until the page has stopped, so it never vanishes before the stamp
+        if (t === 1 && still && !hit) { hit = now; ghost.classList.add("is-landing"); }
+        var k = hit ? Math.min(1, (now - hit) / 110) : 0;
+        if (k === 1) { ghost.remove(); land(); return; }
+        var p = mid(cell), q = mid(target), fit = Math.min(1, target.offsetHeight / side);
+        var size = t < 1 ? 1 + 0.3 * Math.sin(Math.PI * t) : 1 + (fit - 1) * k;
+        var x = p[0] + (q[0] - p[0]) * e - side / 2, y = p[1] + (q[1] - p[1]) * e - side / 2 - Math.sin(Math.PI * e) * 34;
+        ghost.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) scale(" + size.toFixed(3) + ")";
+        requestAnimationFrame(frame);
       })(t0);
     }
 

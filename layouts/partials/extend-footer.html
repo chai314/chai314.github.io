@@ -8,6 +8,6 @@
     <span class="pi-value">π <span id="pi-rel">≈</span> <output id="pi-value">?</output></span>
   </button>
 </div>
-<script>window.AUTOSCROLL = {{ site.Params.autoscroll | default dict }}; window.DRAGGY = {{ site.Params.draggy | default dict }};</script>
-{{ $js := slice (resources.Get "js/autoscroll.js") (resources.Get "js/draggy.js") (resources.Get "js/knotfig.js") (resources.Get "js/site.js") | resources.Concat "js/site.bundle.js" | resources.Minify | resources.Fingerprint "sha256" }}
+<script>window.AUTOSCROLL = {{ site.Params.autoscroll | default dict }}; window.DRAGGY = {{ site.Params.draggy | default dict }}; window.WALKS = {{ site.Params.walks | default dict }};</script>
+{{ $js := slice (resources.Get "js/autoscroll.js") (resources.Get "js/draggy.js") (resources.Get "js/knotfig.js") (resources.Get "js/walks.js") (resources.Get "js/site.js") | resources.Concat "js/site.bundle.js" | resources.Minify | resources.Fingerprint "sha256" }}
 <script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
